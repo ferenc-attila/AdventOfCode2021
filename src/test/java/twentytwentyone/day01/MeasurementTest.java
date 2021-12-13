@@ -1,4 +1,4 @@
-package twentytwentyone.firstday;
+package twentytwentyone.day01;
 
 import org.junit.jupiter.api.Test;
 

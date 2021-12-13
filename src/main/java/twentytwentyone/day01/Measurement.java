@@ -1,21 +1,23 @@
-package twentytwentyone.firstday;
+package twentytwentyone.day01;
 
-import java.io.IOException;
-import java.nio.file.Files;
+import utilities.ReadTextFile;
+
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Measurement {
 
+    private ReadTextFile readTextFile = new ReadTextFile();
+
     public static void main(String[] args) {
         Measurement measurement = new Measurement();
-        System.out.println(measurement.countIncreases(Path.of("src/main/resources/measurements.txt")));
-        System.out.println(measurement.countIncreasesSumOfThree(Path.of("src/main/resources/measurements.txt")));
+        System.out.println(measurement.countIncreases(Path.of("src/main/resources/01_measurements.txt")));
+        System.out.println(measurement.countIncreasesSumOfThree(Path.of("src/main/resources/01_measurements.txt")));
     }
 
     public int countIncreases(Path path) {
-        List<String> contentOfFile = readTextFile(path);
+        List<String> contentOfFile = readTextFile.readTextFile(path);
         List<Integer> measurements = createMeasurementsList(contentOfFile);
         int count = 0;
         for (int i = 1; i < measurements.size(); i++) {
@@ -27,7 +29,7 @@ public class Measurement {
     }
 
     public int countIncreasesSumOfThree(Path path) {
-        List<String> contentOfFile = readTextFile(path);
+        List<String> contentOfFile = readTextFile.readTextFile(path);
         List<Integer> measurements = createMeasurementsList(contentOfFile);
         int count = 0;
         for (int i = 2; i < measurements.size() - 1; i++) {
@@ -36,14 +38,6 @@ public class Measurement {
             }
         }
         return count;
-    }
-
-    private List<String> readTextFile(Path path) {
-        try {
-            return Files.readAllLines(path);
-        } catch (IOException ioe) {
-            throw new IllegalStateException("Unable to read file!", ioe);
-        }
     }
 
     private List<Integer> createMeasurementsList(List<String> stringListOfIntegers) {
